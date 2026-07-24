@@ -1,0 +1,737 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>sl0tbot — command reference</title>
+<meta name="description" content="Command reference for sl0tbot on Twitch: !random, !slotinfo, !same5 and !whocalled, the full !random filter list, and which channels each command works in.">
+<meta property="og:title" content="sl0tbot — command reference">
+<meta property="og:description" content="Command reference for sl0tbot on Twitch: !random, !slotinfo, !same5 and !whocalled, the full !random filter list, and which channels each command works in.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#131119">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; }
+  h1, h2, h3, p, dl, dd, figure { margin: 0; }
+  img, svg { max-width: 100%; height: auto; }
+</style>
+<style>
+  :root {
+    --ground: #FBFAFC;
+    --surface: #F2F0F6;
+    --surface-2: #E8E4EF;
+    --ink: #1A1622;
+    --muted: #665F75;
+    --rule: #DCD7E4;
+    --accent: #A2650A;
+    --accent-soft: #F6EAD5;
+    --open: #146A63;
+    --open-soft: #DDEFEC;
+    --gated: #8E2F4D;
+    --gated-soft: #F6E2E8;
+
+    --mono: ui-monospace, "Cascadia Mono", "Cascadia Code", Consolas, "SF Mono", Menlo, monospace;
+    --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI Variable Text", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+
+    --step-0: 1rem;
+    --step-1: 1.15rem;
+    --step-2: 1.45rem;
+    --step-3: 1.9rem;
+    --step-4: 2.6rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #131119;
+      --surface: #1C1A24;
+      --surface-2: #262231;
+      --ink: #ECE9F1;
+      --muted: #9A93A8;
+      --rule: #322D3D;
+      --accent: #F2AC42;
+      --accent-soft: #2C2312;
+      --open: #45C6AE;
+      --open-soft: #10302C;
+      --gated: #E8798F;
+      --gated-soft: #331A22;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground: #131119;
+    --surface: #1C1A24;
+    --surface-2: #262231;
+    --ink: #ECE9F1;
+    --muted: #9A93A8;
+    --rule: #322D3D;
+    --accent: #F2AC42;
+    --accent-soft: #2C2312;
+    --open: #45C6AE;
+    --open-soft: #10302C;
+    --gated: #E8798F;
+    --gated-soft: #331A22;
+  }
+
+  :root[data-theme="light"] {
+    --ground: #FBFAFC;
+    --surface: #F2F0F6;
+    --surface-2: #E8E4EF;
+    --ink: #1A1622;
+    --muted: #665F75;
+    --rule: #DCD7E4;
+    --accent: #A2650A;
+    --accent-soft: #F6EAD5;
+    --open: #146A63;
+    --open-soft: #DDEFEC;
+    --gated: #8E2F4D;
+    --gated-soft: #F6E2E8;
+  }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: var(--step-0);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 62rem;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+  }
+
+  a { color: inherit; }
+  a:focus-visible,
+  summary:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* ---------- masthead ---------- */
+
+  .masthead { display: flex; flex-direction: column; gap: 1rem; }
+
+  .wordmark {
+    font-family: var(--mono);
+    font-size: var(--step-4);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin: 0;
+  }
+  .wordmark .bang { color: var(--accent); }
+
+  .standfirst {
+    font-size: var(--step-1);
+    color: var(--muted);
+    max-width: 34em;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--muted);
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  /* ---------- notice ---------- */
+
+  .notice {
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    padding: 1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .notice h2 {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 0;
+    color: var(--accent);
+  }
+  .notice p { margin: 0; max-width: 62ch; }
+
+  /* ---------- sections ---------- */
+
+  section { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  h2.section-title {
+    font-family: var(--mono);
+    font-size: var(--step-3);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  .lede { color: var(--muted); max-width: 66ch; margin: 0; }
+
+  /* ---------- command cards ---------- */
+
+  .cmds { display: flex; flex-direction: column; gap: 1.25rem; }
+
+  .cmd {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .cmd-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.75rem 1rem;
+    justify-content: space-between;
+  }
+
+  .cmd-name {
+    font-family: var(--mono);
+    font-size: var(--step-2);
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .cmd-name .bang { color: var(--accent); }
+  .cmd-name .arg { color: var(--muted); font-weight: 400; }
+
+  .cmd-purpose { margin: 0; max-width: 66ch; }
+
+  .variants { display: flex; flex-direction: column; gap: 0.5rem; margin: 0; }
+
+  .variant {
+    display: grid;
+    grid-template-columns: minmax(11rem, auto) 1fr;
+    gap: 0.25rem 1.25rem;
+    align-items: baseline;
+    padding: 0.4rem 0;
+    border-top: 1px solid var(--rule);
+  }
+  .variant:first-child { border-top: 0; }
+  .variant dt { font-family: var(--mono); font-size: 0.88rem; }
+  .variant dd { margin: 0; color: var(--muted); font-size: 0.94rem; }
+
+  /* ---------- pills ---------- */
+
+  .pill {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .pill-open { background: var(--open-soft); color: var(--open); }
+  .pill-gated { background: var(--gated-soft); color: var(--gated); }
+  .pill-cool { background: var(--surface-2); color: var(--muted); }
+
+  /* ---------- filter groups ---------- */
+
+  .filter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1.25rem;
+  }
+
+  .fgroup {
+    border-top: 2px solid var(--accent);
+    padding-top: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .fgroup h3 {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+  .fgroup p { margin: 0; font-size: 0.9rem; color: var(--muted); }
+
+  code, .tok {
+    font-family: var(--mono);
+    font-size: 0.88em;
+    background: var(--surface-2);
+    padding: 0.1em 0.4em;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+
+  .tokens { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+
+  /* ---------- examples ---------- */
+
+  .examples { display: flex; flex-direction: column; gap: 0; }
+  .example {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.15rem;
+    padding: 0.7rem 0;
+    border-top: 1px solid var(--rule);
+  }
+  .example:first-child { border-top: 0; }
+  .example .line {
+    font-family: var(--mono);
+    font-size: 0.92rem;
+    overflow-x: auto;
+    white-space: pre;
+    padding-bottom: 0.15rem;
+  }
+  .example .line .bang { color: var(--accent); }
+  .example .why { color: var(--muted); font-size: 0.9rem; }
+
+  /* ---------- table ---------- */
+
+  .table-scroll { overflow-x: auto; border: 1px solid var(--rule); }
+  table { border-collapse: collapse; width: 100%; font-size: 0.93rem; }
+  caption {
+    text-align: left;
+    padding: 0.9rem 1rem;
+    color: var(--muted);
+    font-size: 0.88rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  th, td { padding: 0.65rem 1rem; text-align: left; border-bottom: 1px solid var(--rule); }
+  tbody tr:last-child td { border-bottom: 0; }
+  th {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 400;
+  }
+  td.chan { font-family: var(--mono); }
+  td { font-variant-numeric: tabular-nums; }
+
+  /* ---------- operator ---------- */
+
+  details.operator {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    padding: 0 1.25rem;
+  }
+  details.operator summary {
+    cursor: pointer;
+    padding: 1rem 0;
+    font-family: var(--mono);
+    font-size: 0.95rem;
+    font-weight: 700;
+    list-style-position: inside;
+  }
+  details.operator[open] summary { border-bottom: 1px solid var(--rule); }
+  .operator-body { padding: 1.25rem 0; display: flex; flex-direction: column; gap: 1.25rem; }
+
+  footer {
+    border-top: 1px solid var(--rule);
+    padding-top: 1.5rem;
+    color: var(--muted);
+    font-size: 0.86rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+
+  @media (max-width: 34rem) {
+    .variant { grid-template-columns: 1fr; }
+    .wordmark { font-size: var(--step-3); }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <h1 class="wordmark"><span class="bang">!</span>sl0tbot</h1>
+    <p class="standfirst">Slot picker, slot stats, and giveaway-winner lookups for Twitch chat. Type a command in any channel where the bot is present.</p>
+    <div class="meta-row">
+      <span>7 channels</span>
+      <span>Rainbet catalogue</span>
+      <span>4 chat commands</span>
+    </div>
+  </header>
+
+  <div class="notice">
+    <h2>In-chat help is currently switched off</h2>
+    <p><code>!random help</code> and <code>@sl0tbot help</code> return nothing at the moment — the bot accepts the request and stays silent. This page is the reference until that is turned back on.</p>
+  </div>
+
+  <section>
+    <p class="eyebrow">Commands</p>
+    <h2 class="section-title">What you can type</h2>
+    <p class="lede">Every command works the same way in each channel that has it. Where a cooldown is listed, it applies per person, per channel.</p>
+
+    <div class="cmds">
+
+      <article class="cmd">
+        <div class="cmd-head">
+          <h3 class="cmd-name"><span class="bang">!</span>random <span class="arg">[filters]</span></h3>
+          <span class="pill pill-cool">10s cooldown</span>
+        </div>
+        <p class="cmd-purpose">Picks one slot at random from the catalogue. Add filters to narrow what it can pick — provider, volatility, max win, RTP, gameplay traits, themes. Filters combine in any order.</p>
+        <dl class="variants">
+          <div class="variant">
+            <dt>!random</dt>
+            <dd>Pick from the channel's default pool</dd>
+          </div>
+          <div class="variant">
+            <dt>!random hacksaw cluster</dt>
+            <dd>Narrow by provider and gameplay trait</dd>
+          </div>
+          <div class="variant">
+            <dt>!random default &lt;filters&gt;</dt>
+            <dd>Save filters as your personal default</dd>
+          </div>
+          <div class="variant">
+            <dt>!random default show</dt>
+            <dd>See what you have saved</dd>
+          </div>
+          <div class="variant">
+            <dt>!random default reset</dt>
+            <dd>Clear your saved filters</dd>
+          </div>
+        </dl>
+      </article>
+
+      <article class="cmd">
+        <div class="cmd-head">
+          <h3 class="cmd-name"><span class="bang">!</span>slotinfo <span class="arg">&lt;name&gt;</span></h3>
+        </div>
+        <p class="cmd-purpose">Stats for one slot — RTP, max win, volatility, provider, release year. If the name matches several slots you get a numbered list, then pick from it.</p>
+        <dl class="variants">
+          <div class="variant">
+            <dt>!slotinfo sweet bonanza</dt>
+            <dd>Summary stats</dd>
+          </div>
+          <div class="variant">
+            <dt>!slotinfo paytable &lt;name&gt;</dt>
+            <dd>Symbol paytable</dd>
+          </div>
+          <div class="variant">
+            <dt>!slotinfo desc &lt;name&gt;</dt>
+            <dd>Game description</dd>
+          </div>
+          <div class="variant">
+            <dt>!slotinfo detailed &lt;name&gt;</dt>
+            <dd>Everything at once</dd>
+          </div>
+          <div class="variant">
+            <dt>!slotinfo pick &lt;n&gt;</dt>
+            <dd>Choose from an ambiguous match list</dd>
+          </div>
+        </dl>
+      </article>
+
+      <article class="cmd">
+        <div class="cmd-head">
+          <h3 class="cmd-name"><span class="bang">!</span>same5 <span class="arg">[@user] [detailed]</span></h3>
+          <span class="pill pill-cool">15s cooldown</span>
+        </div>
+        <p class="cmd-purpose">Same5Winners stats for this channel's tracked giveaway winner. Repeating the same lookup is deduped for about 15 seconds, or 60 seconds for the detailed form.</p>
+        <dl class="variants">
+          <div class="variant">
+            <dt>!same5</dt>
+            <dd>The channel's current tracked winner</dd>
+          </div>
+          <div class="variant">
+            <dt>!same5 @user</dt>
+            <dd>Someone specific</dd>
+          </div>
+          <div class="variant">
+            <dt>!same5 detailed</dt>
+            <dd>Per-streamer breakdown</dd>
+          </div>
+        </dl>
+      </article>
+
+      <article class="cmd">
+        <div class="cmd-head">
+          <h3 class="cmd-name"><span class="bang">!</span>whocalled <span class="arg">&lt;slot&gt;</span></h3>
+          <span class="pill pill-cool">10s cooldown</span>
+        </div>
+        <p class="cmd-purpose">Who called that slot first in the current run, how long ago, and anyone else who called it inside the credit window. Repeat calls by the same person count once. Earlier runs are reported separately so an old call is never mistaken for a fresh one.</p>
+        <dl class="variants">
+          <div class="variant">
+            <dt>!whocalled pirots</dt>
+            <dd>First caller in this run</dd>
+          </div>
+          <div class="variant">
+            <dt>!whocalledit pirots</dt>
+            <dd>Same command, alternative spelling</dd>
+          </div>
+        </dl>
+      </article>
+
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Filters</p>
+    <h2 class="section-title">Narrowing !random</h2>
+    <p class="lede">Filters are plain words typed after the command, in any order. Anything you leave out stays at the channel default.</p>
+
+    <div class="filter-grid">
+
+      <div class="fgroup">
+        <h3>Provider &amp; format</h3>
+        <p>Name any provider, or ask for a format.</p>
+        <div class="tokens">
+          <span class="tok">hacksaw</span><span class="tok">pragmatic</span><span class="tok">nolimit</span>
+          <span class="tok">megaways</span><span class="tok">mega</span><span class="tok">bonus</span><span class="tok">bonus-buy</span>
+        </div>
+      </div>
+
+      <div class="fgroup">
+        <h3>Volatility</h3>
+        <p>A word or a numeric range, 1 to 7.</p>
+        <div class="tokens">
+          <span class="tok">high</span><span class="tok">low</span><span class="tok">3-5</span><span class="tok">low-high</span>
+        </div>
+      </div>
+
+      <div class="fgroup">
+        <h3>Release year</h3>
+        <p>Catalogue covers 2015 to 2026.</p>
+        <div class="tokens">
+          <span class="tok">2020</span><span class="tok">2015-2026</span>
+        </div>
+      </div>
+
+      <div class="fgroup">
+        <h3>Max win</h3>
+        <p>Exact, a floor, a ceiling, or a band. <code>k</code> works as thousands.</p>
+        <div class="tokens">
+          <span class="tok">25000x</span><span class="tok">7500x+</span><span class="tok">7500x-</span>
+          <span class="tok">-7500x</span><span class="tok">7500-25000x</span><span class="tok">300k</span>
+        </div>
+      </div>
+
+      <div class="fgroup">
+        <h3>Rainbet stats</h3>
+        <p>Every one takes <code>+</code> for a floor, <code>-</code> for a ceiling, or a band.</p>
+        <div class="tokens">
+          <span class="tok">rtp96+</span><span class="tok">rtp96-98</span><span class="tok">spins10k+</span>
+          <span class="tok">big500+</span><span class="tok">lucky5k+</span>
+          <span class="tok">minbet0.25+</span><span class="tok">maxbet50+</span>
+        </div>
+      </div>
+
+      <div class="fgroup">
+        <h3>Strictness</h3>
+        <p>Whether a slot missing catalogue data can still be picked.</p>
+        <div class="tokens">
+          <span class="tok">relaxed</span><span class="tok">strict</span><span class="tok">save-bonus</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Gameplay traits</p>
+    <h2 class="section-title">How the game plays</h2>
+    <p class="lede">Add one or more. Several accept variant spellings — <code>cluster</code>, <code>cluster-pays</code> and <code>clusters</code> all mean the same thing.</p>
+    <div class="tokens">
+      <span class="tok">cluster</span><span class="tok">ways</span><span class="tok">paylines</span><span class="tok">tumbles</span>
+      <span class="tok">cascade</span><span class="tok">free-spins</span><span class="tok">feature-buy</span><span class="tok">hold-win</span>
+      <span class="tok">sticky</span><span class="tok">multiplier</span><span class="tok">expanding</span><span class="tok">wild</span>
+      <span class="tok">scatter</span><span class="tok">pick-bonus</span><span class="tok">bonus-game</span><span class="tok">respins</span>
+      <span class="tok">grid</span>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Themes</p>
+    <h2 class="section-title">What the game is about</h2>
+    <div class="tokens">
+      <span class="tok">animal</span><span class="tok">asian</span><span class="tok">book</span><span class="tok">candy</span>
+      <span class="tok">card</span><span class="tok">christmas</span><span class="tok">dice</span><span class="tok">easter</span>
+      <span class="tok">egypt</span><span class="tok">fire</span><span class="tok">fishing</span><span class="tok">food</span>
+      <span class="tok">fruit</span><span class="tok">gold</span><span class="tok">halloween</span><span class="tok">horror</span>
+      <span class="tok">irish</span><span class="tok">jewelry</span><span class="tok">jungle</span><span class="tok">mexican</span>
+      <span class="tok">money</span><span class="tok">mythology</span><span class="tok">pirate</span><span class="tok">romance</span>
+      <span class="tok">royal</span><span class="tok">space</span><span class="tok">western</span>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Putting it together</p>
+    <h2 class="section-title">Examples</h2>
+    <div class="examples">
+      <div class="example">
+        <div class="line"><span class="bang">!</span>random hacksaw 7500x- rtp96-</div>
+        <div class="why">Hacksaw games, max win under 7,500x, RTP under 96%</div>
+      </div>
+      <div class="example">
+        <div class="line"><span class="bang">!</span>random cluster tumbles high</div>
+        <div class="why">Cluster pays and tumbles, high volatility</div>
+      </div>
+      <div class="example">
+        <div class="line"><span class="bang">!</span>random egypt megaways 2022-2026</div>
+        <div class="why">Egyptian-themed Megaways from the last few years</div>
+      </div>
+      <div class="example">
+        <div class="line"><span class="bang">!</span>random default pragmatic bonus rtp96+</div>
+        <div class="why">Save that as your personal default for every future !random</div>
+      </div>
+      <div class="example">
+        <div class="line"><span class="bang">!</span>whocalled sugar rush</div>
+        <div class="why">Who called Sugar Rush first this run</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Availability</p>
+    <h2 class="section-title">Where it works</h2>
+    <p class="lede">Open channels let anyone use the commands. Restricted channels answer only moderators, the broadcaster, and bot operators.</p>
+    <div class="table-scroll">
+      <table>
+        <caption>Access by channel. !whocalled is enabled separately from the others.</caption>
+        <thead>
+          <tr>
+            <th scope="col">Channel</th>
+            <th scope="col">Who can use it</th>
+            <th scope="col">!random · !slotinfo · !same5</th>
+            <th scope="col">!whocalled</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="chan">bean</td>
+            <td><span class="pill pill-open">Everyone</span></td>
+            <td>Yes</td>
+            <td>Yes</td>
+          </tr>
+          <tr>
+            <td class="chan">adambomb</td>
+            <td><span class="pill pill-open">Everyone</span></td>
+            <td>Yes</td>
+            <td>Yes</td>
+          </tr>
+          <tr>
+            <td class="chan">hunterowner</td>
+            <td><span class="pill pill-open">Everyone</span></td>
+            <td>Yes</td>
+            <td>Yes</td>
+          </tr>
+          <tr>
+            <td class="chan">snutzy</td>
+            <td><span class="pill pill-open">Everyone</span></td>
+            <td>Yes</td>
+            <td>Yes</td>
+          </tr>
+          <tr>
+            <td class="chan">mitchjones</td>
+            <td><span class="pill pill-gated">Mods &amp; operators</span></td>
+            <td>Yes</td>
+            <td>No</td>
+          </tr>
+          <tr>
+            <td class="chan">andymilonakis</td>
+            <td><span class="pill pill-gated">Mods &amp; operators</span></td>
+            <td>Yes</td>
+            <td>No</td>
+          </tr>
+          <tr>
+            <td class="chan">dankquan</td>
+            <td><span class="pill pill-gated">Mods &amp; operators</span></td>
+            <td>Yes</td>
+            <td>No</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Operators</p>
+    <h2 class="section-title">Console</h2>
+    <details class="operator">
+      <summary>Commands available at the bot console</summary>
+      <div class="operator-body">
+        <p class="lede">Run on the machine hosting the bot. Not available from chat.</p>
+        <dl class="variants">
+          <div class="variant">
+            <dt>say &lt;channel&gt; &lt;message&gt;</dt>
+            <dd>Send a message as the bot. Also <code>msg</code>, <code>send</code>. Ignores pause and send-gating.</dd>
+          </div>
+          <div class="variant">
+            <dt>sends status</dt>
+            <dd>Per-channel automated-send state; <code>sends on|off [channel]</code> to change it</dd>
+          </div>
+          <div class="variant">
+            <dt>channels</dt>
+            <dd>Which channels are currently joined</dd>
+          </div>
+          <div class="variant">
+            <dt>slotinfo find &lt;trait|theme&gt;</dt>
+            <dd>List every cached slot matching those tokens</dd>
+          </div>
+          <div class="variant">
+            <dt>slotinfo narrow &lt;trait&gt;</dt>
+            <dd>What pairs with it, and how far each option narrows the pool</dd>
+          </div>
+          <div class="variant">
+            <dt>slotinfo narrow --slot &lt;name&gt;</dt>
+            <dd>One slot's own traits and themes, rarest first</dd>
+          </div>
+          <div class="variant">
+            <dt>slotinfo traits</dt>
+            <dd>Payline kinds, trait counts and bonus tags across the cache</dd>
+          </div>
+          <div class="variant">
+            <dt>random count</dt>
+            <dd>Pool size for the current filters, without picking</dd>
+          </div>
+          <div class="variant">
+            <dt>random filters</dt>
+            <dd>Show the filters currently in force</dd>
+          </div>
+        </dl>
+      </div>
+    </details>
+  </section>
+
+  <footer>
+    <p>Cooldowns are per person, per channel. A command on cooldown is ignored rather than refused, so nothing appears in chat.</p>
+    <p>Slot data comes from the local Rainbet catalogue cache. A slot the cache has never seen cannot be picked or looked up.</p>
+  </footer>
+
+</div>
+</body>
+</html>
