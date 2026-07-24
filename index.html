@@ -412,8 +412,9 @@
       <article class="cmd">
         <div class="cmd-head">
           <h3 class="cmd-name"><span class="bang">!</span>slotinfo <span class="arg">&lt;name&gt;</span></h3>
+          <span class="pill pill-cool">10s cooldown</span>
         </div>
-        <p class="cmd-purpose">Stats for one slot — RTP, max win, volatility, provider, release year. If the name matches several slots you get a numbered list, then pick from it.</p>
+        <p class="cmd-purpose">Stats for one slot — RTP, max win, volatility, provider, release year. If the name matches several slots you get a numbered list, then pick from it. The longer forms below — paytable, desc and detailed — carry a 40 second cooldown instead of 10.</p>
         <dl class="variants">
           <div class="variant">
             <dt>!slotinfo sweet bonanza</dt>
@@ -600,60 +601,44 @@
   <section>
     <p class="eyebrow">Availability</p>
     <h2 class="section-title">Where it works</h2>
-    <p class="lede">Open channels let anyone use the commands. Restricted channels answer only moderators, the broadcaster, and bot operators.</p>
+    <p class="lede">Every command works in every channel below — what changes is who may use it. Open channels answer anyone; restricted channels answer moderators, the broadcaster, and bot operators.</p>
     <div class="table-scroll">
       <table>
-        <caption>Access by channel. !whocalled is enabled separately from the others.</caption>
+        <caption>All four commands follow the same access rule in each channel.</caption>
         <thead>
           <tr>
             <th scope="col">Channel</th>
             <th scope="col">Who can use it</th>
-            <th scope="col">!random · !slotinfo · !same5</th>
-            <th scope="col">!whocalled</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td class="chan">bean</td>
             <td><span class="pill pill-open">Everyone</span></td>
-            <td>Yes</td>
-            <td>Yes</td>
           </tr>
           <tr>
             <td class="chan">adambomb</td>
             <td><span class="pill pill-open">Everyone</span></td>
-            <td>Yes</td>
-            <td>Yes</td>
           </tr>
           <tr>
             <td class="chan">hunterowner</td>
             <td><span class="pill pill-open">Everyone</span></td>
-            <td>Yes</td>
-            <td>Yes</td>
           </tr>
           <tr>
             <td class="chan">snutzy</td>
             <td><span class="pill pill-open">Everyone</span></td>
-            <td>Yes</td>
-            <td>Yes</td>
           </tr>
           <tr>
             <td class="chan">dankquan</td>
             <td><span class="pill pill-open">Everyone</span></td>
-            <td>Yes</td>
-            <td>No</td>
           </tr>
           <tr>
             <td class="chan">mitchjones</td>
             <td><span class="pill pill-gated">Mods &amp; operators</span></td>
-            <td>Yes</td>
-            <td>No</td>
           </tr>
           <tr>
             <td class="chan">andymilonakis</td>
             <td><span class="pill pill-gated">Mods &amp; operators</span></td>
-            <td>Yes</td>
-            <td>No</td>
           </tr>
         </tbody>
       </table>
