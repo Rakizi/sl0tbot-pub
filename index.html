@@ -138,6 +138,7 @@
   .meta-row {
     display: flex;
     flex-wrap: wrap;
+    align-items: baseline;
     gap: 0.5rem 1.5rem;
     font-family: var(--mono);
     font-size: 0.8rem;
@@ -145,6 +146,9 @@
     padding-top: 0.5rem;
     border-top: 1px solid var(--rule);
   }
+
+  .byline { color: var(--accent); }
+  .byline strong { font-weight: 700; }
 
   /* ---------- notice ---------- */
 
@@ -369,6 +373,7 @@
     <h1 class="wordmark"><span class="bang">!</span>sl0tbot</h1>
     <p class="standfirst">Slot picker, slot stats, and giveaway-winner lookups for Twitch chat. Type a command in any channel where the bot is present.</p>
     <div class="meta-row">
+      <span class="byline">Built by <strong>Rakizi</strong></span>
       <span>7 channels</span>
       <span>Rainbet catalogue</span>
       <span>4 chat commands</span>
