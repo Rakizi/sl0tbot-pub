@@ -231,6 +231,16 @@
 
   .variants { display: flex; flex-direction: column; gap: 0.5rem; margin: 0; }
 
+  /* Credit for a service the bot only reads — not something built here. */
+  .credit {
+    margin: 0;
+    padding-top: 0.85rem;
+    border-top: 1px solid var(--rule);
+    font-size: 0.86rem;
+    color: var(--muted);
+  }
+  .credit strong { color: var(--accent); font-weight: 700; }
+
   .variant {
     display: grid;
     grid-template-columns: minmax(11rem, auto) 1fr;
@@ -486,6 +496,7 @@
             <dd>Per-streamer breakdown</dd>
           </div>
         </dl>
+        <p class="credit">Same5Winners is <strong>AmazingToilet</strong>'s — this command only looks it up.</p>
       </article>
 
       <article class="cmd">
