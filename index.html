@@ -356,6 +356,20 @@
     gap: 0.4rem;
   }
 
+  .contact {
+    color: var(--ink);
+    font-size: 0.95rem;
+    margin-bottom: 0.6rem;
+  }
+  .contact a {
+    font-family: var(--mono);
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+  .contact a:hover { text-decoration-thickness: 2px; }
+  .contact .sep { color: var(--rule); padding: 0 0.5rem; }
+
   @media (prefers-reduced-motion: reduce) {
     * { animation: none !important; transition: none !important; }
   }
@@ -665,6 +679,10 @@
   </section>
 
   <footer>
+    <p class="contact">
+      Bot not responding, or want it in your channel?
+      Find me on Twitch at <a href="https://twitch.tv/ranikizi">RaNIKizi</a>.
+    </p>
     <p>Cooldowns are per person, per channel. A command on cooldown is ignored rather than refused, so nothing appears in chat — wait a moment and try again.</p>
     <p>Slot data comes from the Rainbet catalogue. A slot that isn't in it can't be picked or looked up.</p>
   </footer>
