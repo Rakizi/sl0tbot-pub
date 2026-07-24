@@ -334,24 +334,6 @@
   td.chan { font-family: var(--mono); }
   td { font-variant-numeric: tabular-nums; }
 
-  /* ---------- operator ---------- */
-
-  details.operator {
-    background: var(--surface);
-    border: 1px solid var(--rule);
-    padding: 0 1.25rem;
-  }
-  details.operator summary {
-    cursor: pointer;
-    padding: 1rem 0;
-    font-family: var(--mono);
-    font-size: 0.95rem;
-    font-weight: 700;
-    list-style-position: inside;
-  }
-  details.operator[open] summary { border-bottom: 1px solid var(--rule); }
-  .operator-body { padding: 1.25rem 0; display: flex; flex-direction: column; gap: 1.25rem; }
-
   footer {
     border-top: 1px solid var(--rule);
     padding-top: 1.5rem;
@@ -386,8 +368,8 @@
   </header>
 
   <div class="notice">
-    <h2>In-chat help is currently switched off</h2>
-    <p><code>!random help</code> and <code>@sl0tbot help</code> return nothing at the moment — the bot accepts the request and stays silent. This page is the reference until that is turned back on.</p>
+    <h2>Start here</h2>
+    <p>Typing <code>!random help</code> in chat won't get you a reply — the bot doesn't answer help requests. Everything it can do is on this page.</p>
   </div>
 
   <section>
@@ -678,58 +660,9 @@
     </div>
   </section>
 
-  <section>
-    <p class="eyebrow">Operators</p>
-    <h2 class="section-title">Console</h2>
-    <details class="operator">
-      <summary>Commands available at the bot console</summary>
-      <div class="operator-body">
-        <p class="lede">Run on the machine hosting the bot. Not available from chat.</p>
-        <dl class="variants">
-          <div class="variant">
-            <dt>say &lt;channel&gt; &lt;message&gt;</dt>
-            <dd>Send a message as the bot. Also <code>msg</code>, <code>send</code>. Ignores pause and send-gating.</dd>
-          </div>
-          <div class="variant">
-            <dt>sends status</dt>
-            <dd>Per-channel automated-send state; <code>sends on|off [channel]</code> to change it</dd>
-          </div>
-          <div class="variant">
-            <dt>channels</dt>
-            <dd>Which channels are currently joined</dd>
-          </div>
-          <div class="variant">
-            <dt>slotinfo find &lt;trait|theme&gt;</dt>
-            <dd>List every cached slot matching those tokens</dd>
-          </div>
-          <div class="variant">
-            <dt>slotinfo narrow &lt;trait&gt;</dt>
-            <dd>What pairs with it, and how far each option narrows the pool</dd>
-          </div>
-          <div class="variant">
-            <dt>slotinfo narrow --slot &lt;name&gt;</dt>
-            <dd>One slot's own traits and themes, rarest first</dd>
-          </div>
-          <div class="variant">
-            <dt>slotinfo traits</dt>
-            <dd>Payline kinds, trait counts and bonus tags across the cache</dd>
-          </div>
-          <div class="variant">
-            <dt>random count</dt>
-            <dd>Pool size for the current filters, without picking</dd>
-          </div>
-          <div class="variant">
-            <dt>random filters</dt>
-            <dd>Show the filters currently in force</dd>
-          </div>
-        </dl>
-      </div>
-    </details>
-  </section>
-
   <footer>
-    <p>Cooldowns are per person, per channel. A command on cooldown is ignored rather than refused, so nothing appears in chat.</p>
-    <p>Slot data comes from the local Rainbet catalogue cache. A slot the cache has never seen cannot be picked or looked up.</p>
+    <p>Cooldowns are per person, per channel. A command on cooldown is ignored rather than refused, so nothing appears in chat — wait a moment and try again.</p>
+    <p>Slot data comes from the Rainbet catalogue. A slot that isn't in it can't be picked or looked up.</p>
   </footer>
 
 </div>
